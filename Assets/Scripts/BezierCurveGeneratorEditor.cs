@@ -1,14 +1,14 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(RoadGenerator))]
-public class RoadGeneratorEditor : Editor
+[CustomEditor(typeof(BezierCurveGenerator))]
+public class BezierCurveGeneratorEditor : Editor
 {
-    private RoadGenerator generator;
+    private BezierCurveGenerator generator;
 
     void OnEnable()
     {
-        generator = (RoadGenerator)target;
+        generator = (BezierCurveGenerator)target;
     }
 
     public override void OnInspectorGUI()
@@ -18,6 +18,7 @@ public class RoadGeneratorEditor : Editor
         if (GUILayout.Button("Refresh Lanes"))
         {
             generator.InitializeLines(2);
+            generator.RemoveNodes();
         }
     }
 

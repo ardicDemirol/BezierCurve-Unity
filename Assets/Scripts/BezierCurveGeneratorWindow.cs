@@ -1,17 +1,17 @@
 using UnityEditor;
 using UnityEngine;
 
-public class RoadGeneratorWindow : EditorWindow
+public class BezierCurveGeneratorWindow : EditorWindow
 {
-    [MenuItem("Tools/Road Generator")]
+    [MenuItem("Tools/Bezier Curve Generator")]
     public static void ShowWindow()
     {
-        GetWindow<RoadGeneratorWindow>("Road Generator");
+        GetWindow<BezierCurveGeneratorWindow>("Bezier Curve");
     }
 
     private float nodeDistance = 1f;
     private int initializeLineCount = 2;
-    private RoadGenerator roadGenerator;
+    private BezierCurveGenerator roadGenerator;
 
     void OnGUI()
     {
@@ -31,8 +31,8 @@ public class RoadGeneratorWindow : EditorWindow
 
     void CreateNewRoadSystem(int lineCount)
     {
-        GameObject roadSystem = new("Road System");
-        roadGenerator = roadSystem.AddComponent<RoadGenerator>();
+        GameObject roadSystem = new("Bezier Curve System");
+        roadGenerator = roadSystem.AddComponent<BezierCurveGenerator>();
         roadGenerator.InitializeLines(lineCount);
     }
 

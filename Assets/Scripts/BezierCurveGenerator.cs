@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class RoadGenerator : MonoBehaviour
+public class BezierCurveGenerator : MonoBehaviour
 {
     public List<BezierLine> lines = new();
     public int segmentsPerCurve = 20;
@@ -18,6 +18,14 @@ public class RoadGenerator : MonoBehaviour
             lines.Add(newLine);
         }
     }
+    public void RemoveNodes()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(transform.GetChild(i).gameObject);
+        }
+    }
+
 
     void SetupInitialNodes(BezierLine line, int lineIndex)
     {
@@ -43,10 +51,7 @@ public class RoadGenerator : MonoBehaviour
 
     public void GenerateNodesAtInterval(float interval)
     {
-        for (int i = transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(transform.GetChild(i).gameObject);
-        }
+        RemoveNodes();
 
         foreach (var line in lines)
         {
@@ -68,6 +73,7 @@ public class RoadGenerator : MonoBehaviour
         }
     }
 
+
     void CreateNodeMarker(Vector3 position)
     {
         GameObject marker = new("Node");
@@ -88,7 +94,7 @@ public class RoadGenerator : MonoBehaviour
         marker.transform.localScale = Vector3.one * 0.1f;
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         if (lines == null) return;
 
